@@ -69,17 +69,17 @@ plt.show()
 
 
 #%%
-# Age and education distribution analysis
-
-sns.distplot(adult['age'], bins=20)
-plt.title('Distribution of Age')
-plt.xlabel('Age')
-plt.ylabel('Density')
-plt.show()
+# Age and education distribution analysis 
 
 sns.distplot(adult['education-num'], bins=10)
 plt.title('Distribution of Education')
 plt.xlabel('Education Years')
+plt.ylabel('Density')
+plt.show()
+
+sns.distplot(adult['age'], bins=20)
+plt.title('Distribution of Age')
+plt.xlabel('Age')
 plt.ylabel('Density')
 plt.show()
 
