@@ -11,6 +11,8 @@ from time import time
 import warnings
 warnings.filterwarnings("ignore")
 import os
+from scipy import stats
+
 # from ucimlrepo import fetch_ucirepo 
 
 
@@ -81,6 +83,26 @@ plt.xlabel('Education Years')
 plt.ylabel('Density')
 plt.show()
 
+# Calculate common statistical metrics
+data = adult.age
+mean = np.mean(data)
+median = np.median(data)
+mode = stats.mode(data)
+std_dev = np.std(data)
+variance = np.var(data)
+skewness = stats.skew(data)
+kurtosis = stats.kurtosis(data)
+
+# Display the metrics in a table format
+print("===== Statistical Metrics - Age =====")
+print("---------------------")
+print(f"Mean: {mean}")
+print(f"Median: {median}")
+print(f"Mode: {mode.mode} (with frequency {mode.count})")
+print(f"Standard Deviation: {std_dev}")
+print(f"Variance: {variance}")
+print(f"Skewness: {skewness}")
+print(f"Kurtosis: {kurtosis}")
 
 
 #%%
@@ -155,4 +177,25 @@ plt.show()
 
 
 #%%
-# 
+# Heatmap education x 
+
+rich = adult[adult.income=='>50K']
+freq_rich = pd.crosstab(rich.education, rich.age_range).fillna(0)
+freq_total = pd.crosstab(adult.education, adult.age_range).fillna(0)
+freq_percent = freq_rich / freq_total
+freq_percent = freq_percent.fillna(0).reindex(custom_order)
+
+plt.figure(figsize=(8, 6))
+sns.heatmap(freq_percent, annot=False, cmap='plasma')
+
+# Customize the plot
+plt.title('High Income Percentage X Age X Education')
+plt.xlabel('Education')
+plt.ylabel('Age')
+
+# Show the heatmap
+plt.show()
+
+
+
+# %%
